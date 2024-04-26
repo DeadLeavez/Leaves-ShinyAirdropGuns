@@ -1,0 +1,209 @@
+{
+    "blacklistFromAirdrop": true, //Will blacklist the recievers from randomly spawning in airdrops.
+    "addToQuests": true, //Adds the newly generated weapons to quests that require the original weapon.
+    "addToMasteries": true, //Adds the newly generated weapons to the mastery groups the original weapon belong to.
+    "replaceAllAirdrops": true, //Will make the airdrop weapon crates always contain a shiny weapon instead of any regular possibility.
+    "debug": false, //Displays a LOT of debug info, only enable if asked to. Or if you're just curious about stuff. :P
+    "allowSpecialSlots": true, //Enable/Disable weapon groups to be allowed in special slots. (Still needs enabling in the weapon group too)
+    //(might be needed to disabled for compatiblity with mods that adjust pockets)
+    "addRevolversIntoPistolCase": true, //adds pistols/revolvers into the pistol case.
+
+    "weaponGroups": //Each weapon group HAVE to have a unique name. Changing the weapon group name during a playthrough will
+    //generate new IDs for weapons and AT BEST will remove them from your inventory, and at WORST corrupt your save.
+    {
+        "ARs":
+        {
+            "weaponsToMakeShiny":
+            [
+                "5447a9cd4bdc2dbd208b4567", //M4A1
+                "5dcbd56fdbd3d91b3e5468d5", //MDR 762
+                "6499849fc93611967b034949", //AK-12
+                "606587252535c57a13424cfd", //MUTANT 47
+                "5a0ec13bfcdbcb00165aa685", //AKMN
+                "57c44b372459772d2b39b8ce", //AS VAL
+                "5bb2475ed4351e00853264e3", //HK-416
+                "65290f395ae2ae97b80fdf2d"  //SIG MCX SPEAR
+            ],
+            "fireRateMultiplier": 1.08,
+            "ergoFlatIncrease": 15,
+            "horizontalRecoilMultiplier": 0.88,
+            "verticalRecoilMultiplier": 0.94,
+            "heatFactorMultiplier": 0.9,
+            "heatFactorByShotMultiplier": 0.9,
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "SMGs":
+        {
+            "weaponsToMakeShiny":
+            [
+                "5fb64bc92b1b027b1f50bcf2", //VECTOR 45
+                "5fc3f2d5900b1d5091531e57", //VECTOR 9
+                "5cc82d76e24e8d00134b4b83", //P90
+                "5bd70322209c4d00d7167b8f" //MP7A2
+            ],
+            "fireRateMultiplier": 1.1,
+            "ergoMultiplier": 1.1,
+            "horizontalRecoilMultiplier": 0.93,
+            "verticalRecoilMultiplier": 0.93,
+            "heatFactorMultiplier": 0.9,
+            "heatFactorByShotMultiplier": 0.9,
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "SemiShotties":
+        {
+            "weaponsToMakeShiny":
+            [
+                "576165642459773c7a400233", //SAIGA 12
+                "606dae0ab0e443224b421bb7" //MP-155
+            ],
+            "fireRateFlatIncrease": 600,
+            "ergoFlatIncrease": 10,
+            "heatFactorMultiplier": 0.6,
+            "heatFactorByShotMultiplier": 0.6,
+            "durabilityBurnMultiplier": 0.7,
+            "setFireMode": [ "single", "fullauto" ],
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "Semis":
+        {
+            "weaponsToMakeShiny":
+            [
+                "60339954d62c9b14ed777c06", //STM 9
+                "59e6687d86f77411d949b251", //MOLOT VPO-209 .366
+                "5aafa857e5b5b00018480968" //M1A
+            ],
+            "fireRateFlatIncrease": 100,
+            "ergoFlatIncrease": 15,
+            "heatFactorMultiplier": 0.8,
+            "heatFactorByShotMultiplier": 0.8,
+            "durabilityBurnMultiplier": 0.85,
+            "setFireMode": [ "single", "fullauto" ],
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "BoltAction":
+        {
+            "weaponsToMakeShiny":
+            [
+                "5bfea6e90db834001b7347f3", //M700
+                "5df24cf80dee1b22f862e9bc" //ORSIS T-5000
+            ],
+            "ergoFlatIncrease": 30,
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "Revolvers":
+        {
+            "weaponsToMakeShiny":
+            [
+                "61a4c8884f95bc3b2c5dc96f", //RHINO .357
+                "633ec7c2a6918cb895019c6c", //RSH 50
+                "6193a720f8ee7e52e42109ed", //USP
+                "5b1fa9b25acfc40018633c01" //Glock 18C
+            ],
+            "ergoFlatIncrease": 25,
+            "accuracyMultiplier": 0.8,
+            "doubleActionAccuracyPenaltyMultiplier": 0.5,
+            "velocityMultiplier": 1.5,
+            "addToSpecialSlots": true,
+            "heatFactorMultiplier": 0.9,
+            "heatFactorByShotMultiplier": 0.9,
+            "durabilityBurnMultiplier": 0.85,
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        },
+        "LMGs":
+        {
+            "weaponsToMakeShiny":
+            [
+                "65268d8ecb944ff1e90ea385"
+            ],
+            "fireRateFlatIncrease": 50,
+            "ergoFlatIncrease": 20,
+            "heatFactorMultiplier": 0.75,
+            "heatFactorByShotMultiplier": 0.75,
+            "durabilityBurnMultiplier": 0.6,
+            "setFireMode": [ "single", "fullauto" ],
+            "horizontalRecoilMultiplier": 0.88,
+            "verticalRecoilMultiplier": 0.94,
+
+            "background": "violet",
+            "prefix": "˙·٠•●♥ ",
+            "suffix": " ♥●•٠·˙",
+            "shortNamePrefix": "♥ ",
+            "shortNameSuffix": " ♥"
+        }
+    
+    }
+}
+
+/*Mods available for modification within a group block. With example data.
+	Any multiplicative adjustments will happen AFTER any flat adjustments.
+		"fireRateMultiplier": 1.05, 				//Multiplicative adjustment of fire rate. 
+		"fireRateFlatIncrease": 100, 				//Flat adjustment of fire rate.
+        //Keep in mind for firerate changes, that the sound of firing full auto wont change. So massive changes might sound pretty bad.
+		"ergoFlatIncrease": 5, 						//Multiplicative adjustment of ergonomics
+		"ergoMultiplier": 1.05, 					/Flat adjustment of ergonomics
+		"horizontalRecoilFlatReduction": 5, 		//Flat adjustment of horizontal recoil
+		"horizontalRecoilMultiplier": 0.95, 		//Multiplicative adjustment of horizontal recoil
+		"verticalRecoilFlatReduction": 5, 			//Flat adjustment of vertical recoil
+		"verticalRecoilMultiplier": 0.95, 			//Multiplicative adjustment of vertical recoil
+		"heatFactorMultiplier": 0.9,				//Multiplicative heat factor
+		"heatFactorByShotMultiplier": 0.9,			//Multiplicative heatbyshot factor
+		"durabilityBurnMultiplier": 0.7,			//Multiplicative adjustment of durability burn.
+		"accuracyMultiplier": 0.9,					//Multiplicative adjustment of accuracy (lower is more accurate)
+		"velocityMultiplier": 1.1,					//Multiplicative adjustment of velocity (Will probably only work properly on weapons with integrated barrel)
+		"doubleActionAccuracyPenaltyMultiplier":0.9,//Mutliplicative adjustment of the peanality applied to weapons using double-action fire mode. (lower is more accurate)
+		"addToSpecialSlots: true,					//Allow weapons from group to be placed in special slots. Insuring weapons in special slot MIGHT dupe them through insurance on death.
+		"setFireMode": [ "single", "fullauto" ],	//Set fire modes. Can cause crazy things like full auto M700. :D
+		"weaponBoxWeight":2							//Set the weighting of the weapon in the airdrop crate. higher makes it more common. Relative to the weight of all other weapons. Defaults to 1.
+	*/
+
+/*The following HAVE to exist in each group block. But all but background can be left empty if desired.
+		"background": "violet", 	//The background of the item in inventory
+		"prefix": "˙·٠•●♥ ",		//Will be applied BEFORE long name of the weapon
+		"suffix": " ♥●•٠·˙",		//WIll be applied AFTER long name of the weapon
+		"shortNamePrefix": "♥ ",	//Will be applied BEFORE short name of the weapon 
+		"shortNameSuffix": " ♥"		//WIll be applied AFTER short name of the weapon
+	*/
+
+/* Colors available for the background 
+		"blue"
+		"yellow"
+		"green"
+		"red"
+		"black"
+		"grey"
+		"violet"
+		"orange"
+		"tracerYellow"
+		"tracerGreen"
+		"tracerRed"
+	*/
