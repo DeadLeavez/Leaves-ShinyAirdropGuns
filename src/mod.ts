@@ -1,29 +1,29 @@
-import { DependencyContainer } from "tsyringe";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
+import type { DependencyContainer } from "tsyringe";
+import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
+import type { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
+import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
 import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
 
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { IInventoryConfig } from "@spt-aki/models/spt/config/IInventoryConfig";
-import { IAirdropConfig } from "@spt-aki/models/spt/config/IAirdropConfig";
+import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
+import type { IInventoryConfig } from "@spt-aki/models/spt/config/IInventoryConfig";
+import type { IAirdropConfig } from "@spt-aki/models/spt/config/IAirdropConfig";
 
 //item creation
-import { CustomItemService } from "@spt-aki/services/mod/CustomItemService";
-import { NewItemFromCloneDetails } from "@spt-aki/models/spt/mod/NewItemDetails";
+import type { CustomItemService } from "@spt-aki/services/mod/CustomItemService";
+import type { NewItemFromCloneDetails } from "@spt-aki/models/spt/mod/NewItemDetails";
 
 // remapping preset ids
-import { HashUtil } from "@spt-aki/utils/HashUtil";
-import { JsonUtil } from "@spt-aki/utils/JsonUtil";
-import { IPreset } from "@spt-aki/models/eft/common/IGlobals";
+import type { HashUtil } from "@spt-aki/utils/HashUtil";
+import type { JsonUtil } from "@spt-aki/utils/JsonUtil";
+import type { IPreset } from "@spt-aki/models/eft/common/IGlobals";
 
-import { VFS } from "@spt-aki/utils/VFS";
+import type { VFS } from "@spt-aki/utils/VFS";
 import { jsonc } from "jsonc";
-import * as path from "path";
+import * as path from "node:path";
 import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor";
-import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import { IItemConfig } from "@spt-aki/models/spt/config/IItemConfig";
+import type { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
+import type { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
+import type { IItemConfig } from "@spt-aki/models/spt/config/IItemConfig";
 
 class LeavesShinyAirdropGuns implements IPostDBLoadMod
 {
@@ -59,7 +59,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         //Configs
         this.itemConfig = configServer.getConfig<IItemConfig>( ConfigTypes.ITEM );
         this.inventoryConfig = configServer.getConfig<IInventoryConfig>( ConfigTypes.INVENTORY );
-        let airdropConfig = configServer.getConfig<IAirdropConfig>( ConfigTypes.AIRDROP );
+        const airdropConfig = configServer.getConfig<IAirdropConfig>( ConfigTypes.AIRDROP );
 
         this.printColor( "[ShinyAirdropGuns] ShinyAirdropGuns Starting. Hello from sweden!" );
 
@@ -67,7 +67,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         this.tables = this.db.getTables();
         this.itemDB = this.tables.templates.items;
 
-        let weaponIDs: any = {};
+        const weaponIDs: any = {};
 
         //Has to be above, because weighting is set when generated now.
         if ( this.config.replaceAllAirdrops )
@@ -83,7 +83,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
         for ( const ID in weaponIDs && this.config.debug )
         {
-            this.logger.info( "NEW_ID:" + ID + "  OLD_ID:" + weaponIDs[ ID ] );
+            this.logger.info( `NEW_ID:${ID}  OLD_ID:${weaponIDs[ ID ]}` );
         }
 
         if ( this.config.addToQuests )
@@ -101,7 +101,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         //Add some debug values and outputs.
         if ( this.config.debug )
         {
-            for ( let location in airdropConfig.airdropChancePercent )
+            for ( const location in airdropConfig.airdropChancePercent )
             {
                 airdropConfig.airdropChancePercent[ location ] = 100;
             }
@@ -119,9 +119,9 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         {
             const loot = airdropConfig.loot;
 
-            let newIDs: string[] = [];
+            const newIDs: string[] = [];
 
-            for ( let ID in weaponIDs )
+            for ( const ID in weaponIDs )
             {
                 newIDs.push( ID );
             }
@@ -154,13 +154,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         for ( const weapon of weaponList )
         {
             //generate data
-            let newLocaleName = weaponGroup.prefix + this.tables.locales.global.en[ weapon + " Name" ] + weaponGroup.suffix;
-            let newShortName = weaponGroup.shortNamePrefix + this.tables.locales.global.en[ weapon + " ShortName" ] + weaponGroup.shortNameSuffix;
+            const newLocaleName = weaponGroup.prefix + this.tables.locales.global.en[ `${weapon} Name` ] + weaponGroup.suffix;
+            const newShortName = weaponGroup.shortNamePrefix + this.tables.locales.global.en[ `${weapon} ShortName` ] + weaponGroup.shortNameSuffix;
 
             //const newName = itemDB[weapon]._name;
             const newName = newLocaleName;
 
-            this.printColor( "[LeavesShinyGuns]\tModding: " + weapon + " " + newName, LogTextColor.YELLOW );
+            this.printColor( `[LeavesShinyGuns]\tModding: ${weapon} ${newName}`, LogTextColor.YELLOW );
 
             const price = 250000;
 
@@ -171,7 +171,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                 ? handbookEntry.ParentId
                 : undefined;
 
-            const newID = weapon + "_shiny_" + groupname;
+            const newID = `${weapon}_shiny_${groupname}`;
 
             const leavesup: NewItemFromCloneDetails = {
                 itemTplToClone: weapon,
@@ -220,7 +220,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
             //BSG FUCKING SNOWFLAKE FILTERS FIXING
             const characterInventory = "55d7217a4bdc2d86028b456d";
 
-            let snowflakeWeapons = [
+            const snowflakeWeapons = [
                 "624c2e8614da335f1e034d8c", //Rhino
                 "61a4c8884f95bc3b2c5dc96f", //Rhino
                 "633ec7c2a6918cb895019c6c", //Rsh 50
@@ -229,15 +229,15 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
             if ( snowflakeWeapons.includes( weapon ) )
             {
-                this.printColor( "[LeavesShinyGuns]\tAdding special exception for silly holster slot items:" + this.itemDB[ weapon ]._name, LogTextColor.CYAN );
+                this.printColor( `[LeavesShinyGuns]\tAdding special exception for silly holster slot items:${this.itemDB[ weapon ]._name}`, LogTextColor.CYAN );
                 this.itemDB[ characterInventory ]._props.Slots[ 2 ]._props.filters[ 0 ].Filter.push( newID );
 
-                //Add all new revolvers to pistol case - and dont add sawed off
-                const sawedoffID = "64748cb8de82c85eaf0a273a";
+                //Add all new revolvers to pistol case - and don't add sawed off
+                const sawedOffID = "64748cb8de82c85eaf0a273a";
                 const pistolCase = "567143bf4bdc2d1a0f8b4567";
-                if ( this.config.addRevolversIntoPistolCase && weapon != sawedoffID )
+                if ( this.config.addRevolversIntoPistolCase && weapon !== sawedOffID )
                 {
-                    this.printColor( "[LeavesShinyGuns]\tAdding revolver to pistolcase: " + this.itemDB[ weapon ]._name, LogTextColor.CYAN );
+                    this.printColor( `[LeavesShinyGuns]\tAdding revolver to pistol case: ${this.itemDB[ weapon ]._name}`, LogTextColor.CYAN );
                     this.itemDB[ pistolCase ]._props.Grids[ 0 ]._props.filters[ 0 ].Filter.push( newID );
                 }
             }
@@ -245,9 +245,9 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
             //if shotty, add to primary filters. (EXCEPT IF ITS THE SAWED OFF.)
             const shotgunParentID = "5447b6094bdc2dc3278b4567";
 
-            if ( this.itemDB[ weapon ]._parent == shotgunParentID && weapon != "64748cb8de82c85eaf0a273a" )
+            if ( this.itemDB[ weapon ]._parent === shotgunParentID && weapon !== "64748cb8de82c85eaf0a273a" )
             {
-                this.printColor( "[LeavesShinyGuns]\tAdding special exception for silly shotguns:" + this.itemDB[ weapon ]._name, LogTextColor.CYAN );
+                this.printColor( `[LeavesShinyGuns]\tAdding special exception for silly shotguns:${this.itemDB[ weapon ]._name}`, LogTextColor.CYAN );
                 this.itemDB[ characterInventory ]._props.Slots[ 0 ]._props.filters[ 0 ].Filter.push( newID );
                 this.itemDB[ characterInventory ]._props.Slots[ 1 ]._props.filters[ 0 ].Filter.push( newID );
             }
@@ -312,7 +312,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
         //Shotguns are fucking snowflakes.
         const shotgunParentID = "5447b6094bdc2dc3278b4567";
-        data.dispersion = this.itemDB[ weapon ]._parent == shotgunParentID ? 1.25 : 0;
+        data.dispersion = this.itemDB[ weapon ]._parent === shotgunParentID ? 1.25 : 0;
 
         return data;
     }
@@ -353,13 +353,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                         break;
                     }
 
-                    let weapons = condition.weapon;
+                    const weapons = condition.weapon;
 
                     for ( const weapon of weapons )
                     {
                         if ( this.addNewWeaponsToArrayThatIncludesOriginalWeapon( weaponsArray, weapon, weapons ) && this.config.debug )
                         {
-                            this.debugJsonOutput( weapons, "New Weapon Array for Quest: " + quest.QuestName );
+                            this.debugJsonOutput( weapons, `New Weapon Array for Quest: ${quest.QuestName}` );
                         }
                     }
                 }
@@ -371,13 +371,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
     {
         const masteries = this.tables.globals.config.Mastering;
 
-        for ( let mastery of masteries )
+        for ( const mastery of masteries )
         {
-            for ( let weapon of mastery.Templates )
+            for ( const weapon of mastery.Templates )
             {
                 if ( this.addNewWeaponsToArrayThatIncludesOriginalWeapon( weaponsArray, weapon, mastery.Templates ) && this.config.debug )
                 {
-                    this.printColor( "Found mastery to push:" + mastery.Name, LogTextColor.YELLOW );
+                    this.printColor( `Found mastery to push:${mastery.Name}`, LogTextColor.YELLOW );
                 }
             }
         }
@@ -388,12 +388,12 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
     private fixPresets ( weaponIDs: any )
     {
         //Fix presets
-        let newPresets: IPreset[] = [];
-        let presets = this.tables.globals.ItemPresets;
+        const newPresets: IPreset[] = [];
+        const presets = this.tables.globals.ItemPresets;
 
         for ( const entry in presets )
         {
-            let preset: IPreset = presets[ entry ];
+            const preset: IPreset = presets[ entry ];
 
             if ( preset.hasOwnProperty( "_encyclopedia" ) )
             {
@@ -401,7 +401,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                 {
                     //Found a preset to copy
                     //this.logger.info(preset._id);
-                    let newPreset = this.jsonUtil.clone( preset );
+                    const newPreset = this.jsonUtil.clone( preset );
 
                     this.generateNewItemIds( newPreset );
 
@@ -414,7 +414,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
                     if ( this.config.debug )
                     {
-                        this.logger.info( "Made new preset for: " + newWeapon );
+                        this.logger.info( `Made new preset for: ${newWeapon}` );
                     }
                 }
             }
@@ -432,7 +432,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         for ( const NEWID in newWeapons )
         {
             //Check if the original weapon has been made any copies of.
-            if ( newWeapons[ NEWID ] == originalWeapon )
+            if ( newWeapons[ NEWID ] === originalWeapon )
             {
                 Array.push( NEWID );
                 found = true;
@@ -443,10 +443,10 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
     private getNewIDsforRelatedWeapon ( weaponIDs: any, weapon: string ): any
     {
-        let foundIDs: any = {};
+        const foundIDs: any = {};
         for ( const ID in weaponIDs )
         {
-            if ( weaponIDs[ ID ] == weapon )
+            if ( weaponIDs[ ID ] === weapon )
             {
                 foundIDs[ ID ] = ID;
             }
@@ -463,9 +463,9 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
         // scan for item ids
         const items = preset._items;
-        let ids = {}; // this is a map / record / dictionary
+        const ids = {}; // this is a map / record / dictionary
 
-        for ( let item of items )
+        for ( const item of items )
         {
             if ( !ids[ item._id ] )
             {
@@ -480,7 +480,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         {
             // not sure if this actually modifies the reference.
             // you might need a normal for(;;) loop here
-            for ( let item of items )
+            for ( const item of items )
             {
                 // update node id
                 // not sure if debug messages of the server are shown in release mode, test this!
@@ -503,13 +503,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         preset._parent = preset._items[ 0 ]._id;
     }
 
-    private debugJsonOutput ( jsonObject: any, label: string = "" )
+    private debugJsonOutput ( jsonObject: any, label = "" )
     {
         if ( this.config.debug )
         {
             if ( label.length > 0 )
             {
-                this.logger.logWithColor( "[" + label + "]", LogTextColor.GREEN );
+                this.logger.logWithColor( `[${label}]`, LogTextColor.GREEN );
             }
             this.logger.logWithColor( JSON.stringify( jsonObject, null, 4 ), LogTextColor.MAGENTA );
         }
