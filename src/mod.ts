@@ -78,7 +78,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         //Generate the new weapons
         for ( const group in this.config.weaponGroups )
         {
-            this.addWeaponGroup( this.config.weaponGroups[ group ], group, weaponIDs );
+            this.addWeaponGroup( group, weaponIDs );
         }
 
         for ( const ID in weaponIDs && this.config.debug )
@@ -143,7 +143,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         this.fixPresets( weaponIDs );
     }
 
-    private addWeaponGroup ( weapons: any, groupname: string, newIDs: any )
+    private addWeaponGroup ( groupname: string, newIDs: any )
     {
         // Get handbook from tables
         const handbook = this.tables.templates.handbook;
@@ -173,7 +173,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
             const newID = `${weapon}_shiny_${groupname}`;
 
-            const leavesup: NewItemFromCloneDetails = {
+            const leavesUp: NewItemFromCloneDetails = {
                 itemTplToClone: weapon,
                 overrideProperties: {
                     bFirerate: data.fireRate,
@@ -206,15 +206,15 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                 },
             };
 
-            this.customItemService.createItemFromClone( leavesup );
+            this.customItemService.createItemFromClone( leavesUp );
 
-            //Add to spcial slot
+            //Add to special slot
             if ( this.config.allowSpecialSlots && weaponGroup.addToSpecialSlots )
             {
-                const pocketsInventroy = "627a4e6b255f7527fb05a0f6";
-                this.itemDB[ pocketsInventroy ]._props.Slots[ 0 ]._props.filters[ 0 ].Filter.push( newID );
-                this.itemDB[ pocketsInventroy ]._props.Slots[ 1 ]._props.filters[ 0 ].Filter.push( newID );
-                this.itemDB[ pocketsInventroy ]._props.Slots[ 2 ]._props.filters[ 0 ].Filter.push( newID );
+                const pocketsInventory = "627a4e6b255f7527fb05a0f6";
+                this.itemDB[ pocketsInventory ]._props.Slots[ 0 ]._props.filters[ 0 ].Filter.push( newID );
+                this.itemDB[ pocketsInventory ]._props.Slots[ 1 ]._props.filters[ 0 ].Filter.push( newID );
+                this.itemDB[ pocketsInventory ]._props.Slots[ 2 ]._props.filters[ 0 ].Filter.push( newID );
             }
 
             //BSG FUCKING SNOWFLAKE FILTERS FIXING
@@ -242,7 +242,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                 }
             }
 
-            //if shotty, add to primary filters. (EXCEPT IF ITS THE SAWED OFF.)
+            //if shotgun, add to primary filters. (EXCEPT IF ITS THE SAWED OFF.)
             const shotgunParentID = "5447b6094bdc2dc3278b4567";
 
             if ( this.itemDB[ weapon ]._parent === shotgunParentID && weapon !== "64748cb8de82c85eaf0a273a" )
@@ -397,7 +397,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
             if ( preset.hasOwnProperty( "_encyclopedia" ) )
             {
-                for ( const newWeapon in this.getNewIDsforRelatedWeapon( weaponIDs, preset._items[ 0 ]._tpl ) )
+                for ( const newWeapon in this.getNewIDsForRelatedWeapon( weaponIDs, preset._items[ 0 ]._tpl ) )
                 {
                     //Found a preset to copy
                     //this.logger.info(preset._id);
@@ -405,7 +405,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
                     this.generateNewItemIds( newPreset );
 
-                    //Fix the link to the reciever.
+                    //Fix the link to the receiver.
                     newPreset._items[ 0 ]._tpl = newWeapon;
                     newPreset._encyclopedia = newPreset._items[ 0 ]._tpl;
                     newPreset._changeWeaponName = false;
@@ -429,19 +429,19 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
     private addNewWeaponsToArrayThatIncludesOriginalWeapon ( newWeapons: any, originalWeapon: string, Array: any ): boolean
     {
         let found = false;
-        for ( const NEWID in newWeapons )
+        for ( const NewID in newWeapons )
         {
             //Check if the original weapon has been made any copies of.
-            if ( newWeapons[ NEWID ] === originalWeapon )
+            if ( newWeapons[ NewID ] === originalWeapon )
             {
-                Array.push( NEWID );
+                Array.push( NewID );
                 found = true;
             }
         }
         return found;
     }
 
-    private getNewIDsforRelatedWeapon ( weaponIDs: any, weapon: string ): any
+    private getNewIDsForRelatedWeapon ( weaponIDs: any, weapon: string ): any
     {
         const foundIDs: any = {};
         for ( const ID in weaponIDs )
