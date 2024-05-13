@@ -10,6 +10,10 @@
         "lineWidth": 320
     },
     "javascript": {
+        "formatter": {
+            "bracketSameLine": false,
+            "bracketSpacing": true
+        },
         "parser": {
             "unsafeParameterDecoratorsEnabled": true
         }
