@@ -13,6 +13,7 @@ dist/
 .idea/
 *.iml
 .vscode/
+package-lock.json
 
 # System Files
 .DS_Store
