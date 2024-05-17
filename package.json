@@ -1,9 +1,9 @@
 {
-    "name": "ShinyAirdropGuns",
+    "name": "shiny_airdrop_guns",
     "version": "2.0.1",
     "main": "src/mod.js",
     "license": "MIT",
-    "author": "Leaves",
+    "author": "leaves",
     "helpAuthor": "Music Maniac, No;Hurry",
     "akiVersion": ">= 3.8.0",
     "scripts": {
