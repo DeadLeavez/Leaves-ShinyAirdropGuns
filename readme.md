@@ -69,3 +69,8 @@ Added many new features, all which are explain in detail in the config.
 ## 2.0.1
 
 - Fix addToSpecialSlots property of weapon groups. This was being ignored and all weapons could be added to special slots.
+
+## 2.1.0
+
+- Update to 3.9.0
+- Change name of folder and name in package.json to follow standards.

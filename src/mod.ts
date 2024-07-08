@@ -1,29 +1,29 @@
 import type { DependencyContainer } from "tsyringe";
-import type { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import type { IPostDBLoadMod } from "@spt-aki/models/external/IPostDBLoadMod";
-import type { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { ConfigTypes } from "@spt-aki/models/enums/ConfigTypes";
+import type { ILogger } from "@spt/models/spt/utils/ILogger";
+import type { IPostDBLoadMod } from "@spt/models/external/IPostDBLoadMod";
+import type { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { ConfigTypes } from "@spt/models/enums/ConfigTypes";
 
-import type { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import type { IInventoryConfig } from "@spt-aki/models/spt/config/IInventoryConfig";
-import type { IAirdropConfig } from "@spt-aki/models/spt/config/IAirdropConfig";
+import type { ConfigServer } from "@spt/servers/ConfigServer";
+import type { IInventoryConfig } from "@spt/models/spt/config/IInventoryConfig";
+import type { IAirdropConfig } from "@spt/models/spt/config/IAirdropConfig";
 
 //item creation
-import type { CustomItemService } from "@spt-aki/services/mod/CustomItemService";
-import type { NewItemFromCloneDetails } from "@spt-aki/models/spt/mod/NewItemDetails";
+import type { CustomItemService } from "@spt/services/mod/CustomItemService";
+import type { NewItemFromCloneDetails } from "@spt/models/spt/mod/NewItemDetails";
 
 // remapping preset ids
-import type { HashUtil } from "@spt-aki/utils/HashUtil";
-import type { JsonUtil } from "@spt-aki/utils/JsonUtil";
-import type { IPreset } from "@spt-aki/models/eft/common/IGlobals";
+import type { HashUtil } from "@spt/utils/HashUtil";
+import type { JsonUtil } from "@spt/utils/JsonUtil";
+import type { IPreset } from "@spt/models/eft/common/IGlobals";
 
-import type { VFS } from "@spt-aki/utils/VFS";
+import type { VFS } from "@spt/utils/VFS";
 import { jsonc } from "jsonc";
 import * as path from "node:path";
-import { LogTextColor } from "@spt-aki/models/spt/logging/LogTextColor";
-import type { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import type { ITemplateItem } from "@spt-aki/models/eft/common/tables/ITemplateItem";
-import type { IItemConfig } from "@spt-aki/models/spt/config/IItemConfig";
+import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
+import type { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
+import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
+import type { IItemConfig } from "@spt/models/spt/config/IItemConfig";
 
 class LeavesShinyAirdropGuns implements IPostDBLoadMod
 {

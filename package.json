@@ -1,11 +1,11 @@
 {
     "name": "shiny_airdrop_guns",
-    "version": "2.0.1",
+    "version": "2.1.0",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "leaves",
     "helpAuthor": "Music Maniac, No;Hurry",
-    "akiVersion": ">= 3.8.0",
+    "sptVersion": ">= 3.9.0",
     "scripts": {
         "setup": "npm i",
         "build": "node ./build.mjs",
