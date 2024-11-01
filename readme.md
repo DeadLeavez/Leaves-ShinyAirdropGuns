@@ -78,6 +78,7 @@ Added many new features, all which are explain in detail in the config.
 ## 2.1.1
 - Update to 3.10.0
 - item IDs have changed, and they can be found in the ``ids.jsonc`` file in the ``config`` directory. They will be generated on the fly if missing. 
+- Weapon groups can have weighting (technically not new, but wasn't mention.) useful if you want to do things like "rarity tiers"
 
 ### TODO
 - Make the quest thing not crash if quests have fucked up data.

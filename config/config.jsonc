@@ -44,6 +44,7 @@
                 "5fb64bc92b1b027b1f50bcf2", //VECTOR 45
                 "5fc3f2d5900b1d5091531e57", //VECTOR 9
                 "5cc82d76e24e8d00134b4b83", //P90
+                "668e71a8dadf42204c032ce1", //IWI UZI PRO SMG 9x19 submachine gun",
                 "5bd70322209c4d00d7167b8f" //MP7A2
             ],
             "fireRateMultiplier": 1.1,
@@ -72,12 +73,14 @@
             "heatFactorByShotMultiplier": 0.6,
             "durabilityBurnMultiplier": 0.7,
             "setFireMode": [ "single", "fullauto" ],
+            "weaponBoxWeight":0.8,
 
             "background": "violet",
             "prefix": "˙·٠•●♥ ",
             "suffix": " ♥●•٠·˙",
             "shortNamePrefix": "♥ ",
             "shortNameSuffix": " ♥"
+	
         },
         "Semis":
         {
@@ -108,6 +111,7 @@
                 "5df24cf80dee1b22f862e9bc" //ORSIS T-5000
             ],
             "ergoFlatIncrease": 30,
+            "weaponBoxWeight":0.5,
 
             "background": "violet",
             "prefix": "˙·٠•●♥ ",
@@ -115,13 +119,14 @@
             "shortNamePrefix": "♥ ",
             "shortNameSuffix": " ♥"
         },
-        "Revolvers":
+        "Pistols":
         {
             "weaponsToMakeShiny":
             [
                 "61a4c8884f95bc3b2c5dc96f", //RHINO .357
                 "633ec7c2a6918cb895019c6c", //RSH 50
                 "6193a720f8ee7e52e42109ed", //USP
+                "669fa39b48fc9f8db6035a0c", //Magnum Research Desert Eagle L6 .50 AE pistol",
                 "5b1fa9b25acfc40018633c01" //Glock 18C
             ],
             "ergoFlatIncrease": 25,
@@ -143,7 +148,8 @@
         {
             "weaponsToMakeShiny":
             [
-                "65268d8ecb944ff1e90ea385"
+                "65268d8ecb944ff1e90ea385", //Degtyarev RPDN 7.62x39 machine gun",
+                "661ceb1b9311543c7104149b" //U.S. Ordnance M60E6 7.62x51 light machine gun",
             ],
             "fireRateFlatIncrease": 50,
             "ergoFlatIncrease": 20,
@@ -153,6 +159,7 @@
             "setFireMode": [ "single", "fullauto" ],
             "horizontalRecoilMultiplier": 0.88,
             "verticalRecoilMultiplier": 0.94,
+            "weaponBoxWeight":1.2,	
 
             "background": "violet",
             "prefix": "˙·٠•●♥ ",
