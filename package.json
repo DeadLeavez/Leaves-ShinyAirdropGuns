@@ -5,7 +5,7 @@
     "license": "MIT",
     "author": "leaves",
     "helpAuthor": "Music Maniac, No;Hurry",
-    "sptVersion": ">= 3.9.0",
+    "sptVersion": ">= 3.10.0",
     "scripts": {
         "setup": "npm i",
         "build": "node ./build.mjs",

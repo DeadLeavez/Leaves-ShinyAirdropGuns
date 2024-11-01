@@ -38,6 +38,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
     //Config
     private config: any;
+    private ids: any;
     private inventoryConfig: IInventoryConfig;
     private itemConfig: IItemConfig;
 
@@ -56,12 +57,16 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         const configFile = path.resolve( __dirname, "../config/config.jsonc" );
         this.config = jsonc.parse( this.vfs.readFile( configFile ) );
 
+        // IDs file to save mongoids
+        const IDsFile = path.resolve( __dirname, "../config/ids.jsonc" );
+        this.ids = jsonc.parse( this.vfs.readFile( IDsFile ) );
+
         //Configs
         this.itemConfig = configServer.getConfig<IItemConfig>( ConfigTypes.ITEM );
         this.inventoryConfig = configServer.getConfig<IInventoryConfig>( ConfigTypes.INVENTORY );
         const airdropConfig = configServer.getConfig<IAirdropConfig>( ConfigTypes.AIRDROP );
 
-        this.printColor( "[ShinyAirdropGuns] ShinyAirdropGuns Starting. Hello from sweden!" );
+        this.printColor( "[ShinyAirdropGuns] ShinyAirdropGuns Starting. Stay away from SPT, they bite!" );
 
         // Get tables from database
         this.tables = this.db.getTables();
@@ -80,6 +85,9 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         {
             this.addWeaponGroup( group, weaponIDs );
         }
+
+        //New ids have been generated, so we save them here.
+        jsonc.write( IDsFile, this.ids, { space: 4 } );
 
         for ( const ID in weaponIDs && this.config.debug )
         {
@@ -169,7 +177,10 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
             const handbookEntry = handbook.Items.find( ( item ) => item.Id === weapon );
             const handbookParentId = handbookEntry ? handbookEntry.ParentId : undefined;
 
-            const newID = `${ weapon }_shiny_${ groupname }`;
+            //Generate new IDs due to Tarkov enforcing mongoIDs
+            const idLookupString = `${ weapon }_shiny_${ groupname }`;
+            const newID = this.ids[ idLookupString ] ? this.ids[ idLookupString ] : this.hashUtil.generate();
+            this.ids[ idLookupString ] = newID;
 
             const leavesUp: NewItemFromCloneDetails = {
                 itemTplToClone: weapon,

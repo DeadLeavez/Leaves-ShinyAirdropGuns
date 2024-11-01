@@ -74,3 +74,10 @@ Added many new features, all which are explain in detail in the config.
 
 - Update to 3.9.0
 - Change name of folder and name in package.json to follow standards.
+
+## 2.1.1
+- Update to 3.10.0
+- item IDs have changed, and they can be found in the ``ids.jsonc`` file in the ``config`` directory. They will be generated on the fly if missing. 
+
+### TODO
+- Make the quest thing not crash if quests have fucked up data.
