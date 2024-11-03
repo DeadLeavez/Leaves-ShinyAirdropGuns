@@ -106,23 +106,6 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
         this.debugJsonOutput( this.inventoryConfig.sealedAirdropContainer.weaponRewardWeight, "inventoryConfig.sealedAirdropContainer.weaponRewardWeight" );
 
-        //Add some debug values and outputs.
-        if ( this.config.debug )
-        {
-            for ( const location in airdropConfig.airdropChancePercent )
-            {
-                airdropConfig.airdropChancePercent[ location ] = 100;
-            }
-            airdropConfig.airdropMinStartTimeSeconds = 30;
-            airdropConfig.airdropMaxStartTimeSeconds = 60;
-            airdropConfig.airdropTypeWeightings.mixed = 0;
-            airdropConfig.airdropTypeWeightings.weaponarmor = 1;
-            airdropConfig.airdropTypeWeightings.foodmedical = 0;
-            airdropConfig.airdropTypeWeightings.barter = 0;
-
-            this.debugJsonOutput( airdropConfig.airdropChancePercent, "airdropConfig.airdropChancePercent" );
-        }
-
         if ( this.config.blacklistFromAirdrop )
         {
             const loot = airdropConfig.loot;
@@ -185,20 +168,6 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
             const leavesUp: NewItemFromCloneDetails = {
                 itemTplToClone: weapon,
                 overrideProperties: {
-                    bFirerate: data.fireRate,
-                    Ergonomics: data.ergonomics,
-                    RecoilForceUp: data.horizontalRecoil,
-                    RecoilForceBack: data.verticalRecoil,
-                    weapFireType: data.fireModes,
-                    HeatFactorGun: data.heatFactor,
-                    HeatFactorByShot: data.heatFactorByShot,
-                    BackgroundColor: data.backgroundColor,
-                    shotgunDispersion: data.dispersion,
-                    ShotgunDispersion: data.dispersion,
-                    DurabilityBurnRatio: data.durabilityBurn,
-                    CenterOfImpact: data.accuracy,
-                    Velocity: data.velocity,
-                    DoubleActionAccuracyPenalty: data.doubleActionAccuracy,
                 },
                 newId: newID,
                 parentId: this.itemDB[ weapon ]._parent,
@@ -213,6 +182,23 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                     },
                 },
             };
+
+            //Add props if they exist on the original.
+            this.itemDB[ weapon ]._props.bFirerate ? leavesUp.overrideProperties.bFirerate = data.fireRate : null;
+            this.itemDB[ weapon ]._props.Ergonomics ? leavesUp.overrideProperties.Ergonomics = data.ergonomics : null;
+            this.itemDB[ weapon ]._props.RecoilForceUp ? leavesUp.overrideProperties.RecoilForceUp = data.horizontalRecoil : null;
+            this.itemDB[ weapon ]._props.RecoilForceBack ? leavesUp.overrideProperties.RecoilForceBack = data.verticalRecoil : null;
+            this.itemDB[ weapon ]._props.weapFireType ? leavesUp.overrideProperties.weapFireType = data.fireModes : null;
+            this.itemDB[ weapon ]._props.HeatFactorGun ? leavesUp.overrideProperties.HeatFactorGun = data.heatFactor : null;
+            this.itemDB[ weapon ]._props.HeatFactorByShot ? leavesUp.overrideProperties.HeatFactorByShot = data.heatFactorByShot : null;
+            this.itemDB[ weapon ]._props.BackgroundColor ? leavesUp.overrideProperties.BackgroundColor = data.backgroundColor : null;
+            this.itemDB[ weapon ]._props.shotgunDispersion ? leavesUp.overrideProperties.shotgunDispersion = data.dispersion : null;
+            this.itemDB[ weapon ]._props.ShotgunDispersion ? leavesUp.overrideProperties.ShotgunDispersion = data.dispersion : null;
+            this.itemDB[ weapon ]._props.DurabilityBurnRatio ? leavesUp.overrideProperties.DurabilityBurnRatio = data.durabilityBurn : null;
+            this.itemDB[ weapon ]._props.CenterOfImpact ? leavesUp.overrideProperties.CenterOfImpact = data.accuracy : null;
+            this.itemDB[ weapon ]._props.Velocity ? leavesUp.overrideProperties.Velocity = data.velocity : null;
+            this.itemDB[ weapon ]._props.DoubleActionAccuracyPenalty ? leavesUp.overrideProperties.DoubleActionAccuracyPenalty = data.doubleActionAccuracy : null;
+
 
             this.customItemService.createItemFromClone( leavesUp );
 
