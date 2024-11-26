@@ -24,6 +24,7 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import type { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import type { IItemConfig } from "@spt/models/spt/config/IItemConfig";
+//import { Questrandomizer } from "@leaves/mod";
 
 class LeavesShinyAirdropGuns implements IPostDBLoadMod
 {
@@ -35,6 +36,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
     private tables: IDatabaseTables;
     private itemDB: Record<string, ITemplateItem>;
     private vfs: VFS;
+    private leavesQuestrandomizerCompatibility: unknown;
 
     //Config
     private config: any;
@@ -67,6 +69,22 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         const airdropConfig = configServer.getConfig<IAirdropConfig>( ConfigTypes.AIRDROP );
 
         this.printColor( "[ShinyAirdropGuns] ShinyAirdropGuns Starting. Stay away from SPT, they bite!" );
+
+
+        //Check for quest randomizer compatibility
+        this.printColor( "[ShinyAirdropGuns] Checking if Questrandomizer is installed", LogTextColor.MAGENTA );
+        try
+        {
+            this.leavesQuestrandomizerCompatibility = container.resolve<unknown>( "LeavesQuestrandomizerCompatibility" );
+            if ( this.leavesQuestrandomizerCompatibility !== undefined )
+            {
+                this.printColor( "[ShinyAirdropGuns] Questrandomizer found! Adding shiny weapons to randomized quests!", LogTextColor.MAGENTA );
+            }
+        }
+        catch (e)
+        {
+            this.printColor( "[ShinyAirdropGuns] Questrandomizer cannot be found. Continuing as normal", LogTextColor.MAGENTA );
+        }
 
         // Get tables from database
         this.tables = this.db.getTables();
@@ -252,6 +270,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
             this.inventoryConfig.sealedAirdropContainer.weaponRewardWeight[ newID ] = data.weight;
 
             newIDs[ newID ] = weapon;
+
+            if ( this.leavesQuestrandomizerCompatibility !== undefined )
+            {
+                // @ts-ignore
+                this.leavesQuestrandomizerCompatibility.addWeaponEquivalent( weapon, newID );
+            }
+
         }
 
         return newIDs;

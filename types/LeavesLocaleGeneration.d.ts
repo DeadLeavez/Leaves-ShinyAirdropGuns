@@ -1,0 +1,30 @@
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { JsonUtil } from "@spt/utils/JsonUtil";
+import { HashUtil } from "@spt/utils/HashUtil";
+import { VFS } from "@spt/utils/VFS";
+import { IQuestCondition } from "@spt/models/eft/common/tables/IQuest";
+import { LeavesUtils } from "./LeavesUtils";
+import { LeavesSettingsManager } from "./LeavesSettingsManager";
+export declare class LeavesLocaleGeneration {
+    protected databaseServer: DatabaseServer;
+    protected vfs: VFS;
+    protected jsonUtil: JsonUtil;
+    protected hashUtil: HashUtil;
+    protected logger: ILogger;
+    protected leavesUtils: LeavesUtils;
+    protected leavesSettingsManager: LeavesSettingsManager;
+    private loadedModLocalization;
+    private weaponCategoriesLocalization;
+    private targetLocales;
+    constructor(databaseServer: DatabaseServer, vfs: VFS, jsonUtil: JsonUtil, hashUtil: HashUtil, logger: ILogger, leavesUtils: LeavesUtils, leavesSettingsManager: LeavesSettingsManager);
+    getLoadedLocales(): Set<string>;
+    getWeaponCategoryLocale(category: string, targetLocale: string): string;
+    getLoc(original: string, targetLocale: string): string;
+    generateKillsLocale(task: IQuestCondition, flags: any): void;
+    generateHandoverItemLocale(task: IQuestCondition, categoryName: string): void;
+    addLocaleToAll(text: string, id: string): void;
+    addLocaleTo(targetLocale: string, text: string, id: string): void;
+    editLocaleText(targetID: string, newText: string, targetLocale: string): void;
+    addFullLocale(language: string, name: string, shortname: string, description: string, targetID: string): void;
+}

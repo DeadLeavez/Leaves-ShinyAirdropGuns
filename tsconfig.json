@@ -12,7 +12,8 @@
         "outDir": "tmp",
         "baseUrl": ".",
         "paths": {
-            "@spt/*": ["../../ServerSRC/Server/project/types/*"]
+            "@spt/*": ["../../ServerSRC/Server/project/types/*"],
+            "@leaves/*":["types/*"]
         }
     },
     "include": [
