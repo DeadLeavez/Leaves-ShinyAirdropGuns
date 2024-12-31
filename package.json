@@ -1,6 +1,6 @@
 {
     "name": "shiny_airdrop_guns",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "leaves",

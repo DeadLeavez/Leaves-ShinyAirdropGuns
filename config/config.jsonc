@@ -7,6 +7,7 @@
     "allowSpecialSlots": true, //Enable/Disable weapon groups to be allowed in special slots. (Still needs enabling in the weapon group too)
     //(might be needed to disabled for compatiblity with mods that adjust pockets)
     "addRevolversIntoPistolCase": true, //adds pistols/revolvers into the pistol case.
+    "blacklistFromFence": true,
 
     "weaponGroups": //Each weapon group HAVE to have a unique name. Changing the weapon group name during a playthrough will
     //generate new IDs for weapons and AT BEST will remove them from your inventory, and at WORST corrupt your save.
@@ -22,7 +23,8 @@
                 "5a0ec13bfcdbcb00165aa685", //AKMN
                 "57c44b372459772d2b39b8ce", //AS VAL
                 "5bb2475ed4351e00853264e3", //HK-416
-                "65290f395ae2ae97b80fdf2d"  //SIG MCX SPEAR
+                "65290f395ae2ae97b80fdf2d", //SIG MCX SPEAR
+                "623063e994fc3f7b302a9696"  //G36
             ],
             "fireRateMultiplier": 1.08,
             "ergoFlatIncrease": 15,
@@ -30,6 +32,7 @@
             "verticalRecoilMultiplier": 0.94,
             "heatFactorMultiplier": 0.9,
             "heatFactorByShotMultiplier": 0.9,
+            "durabilityBurnMultiplier": 0.85,
 
             "background": "violet",
             "prefix": "˙·٠•●♥ ",

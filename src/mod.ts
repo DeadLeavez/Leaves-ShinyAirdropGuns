@@ -24,6 +24,7 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import type { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import type { IItemConfig } from "@spt/models/spt/config/IItemConfig";
+import type { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
 //import { Questrandomizer } from "@leaves/mod";
 
 class LeavesShinyAirdropGuns implements IPostDBLoadMod
@@ -81,7 +82,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
                 this.printColor( "[ShinyAirdropGuns] Questrandomizer found! Adding shiny weapons to randomized quests!", LogTextColor.MAGENTA );
             }
         }
-        catch (e)
+        catch ( e )
         {
             this.printColor( "[ShinyAirdropGuns] Questrandomizer cannot be found. Continuing as normal", LogTextColor.MAGENTA );
         }
@@ -124,24 +125,24 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
 
         this.debugJsonOutput( this.inventoryConfig.sealedAirdropContainer.weaponRewardWeight, "inventoryConfig.sealedAirdropContainer.weaponRewardWeight" );
 
+        const newIDs: string[] = [];
+
+        for ( const ID in weaponIDs )
+        {
+            newIDs.push( ID );
+        }
+        this.debugJsonOutput( newIDs, "newIDs" );
+
         if ( this.config.blacklistFromAirdrop )
         {
             const loot = airdropConfig.loot;
 
-            const newIDs: string[] = [];
+            loot.mixed.itemBlacklist.push( ...newIDs );
+            loot.weaponArmor.itemBlacklist.push( ...newIDs )
+            loot.foodMedical.itemBlacklist.push( ...newIDs )
+            loot.barter.itemBlacklist.push( ...newIDs )
 
-            for ( const ID in weaponIDs )
-            {
-                newIDs.push( ID );
-            }
-            this.debugJsonOutput( newIDs, "newIDs" );
-
-            loot.mixed.itemBlacklist = loot.mixed.itemBlacklist.concat( newIDs );
-            loot.weaponArmor.itemBlacklist = loot.weaponArmor.itemBlacklist.concat( newIDs );
-            loot.foodMedical.itemBlacklist = loot.foodMedical.itemBlacklist.concat( newIDs );
-            loot.barter.itemBlacklist = loot.barter.itemBlacklist.concat( newIDs );
-
-            this.itemConfig.blacklist = this.itemConfig.blacklist.concat( newIDs );
+            this.itemConfig.blacklist.push( ...newIDs )
 
             this.debugJsonOutput( loot.mixed.itemBlacklist, "loot.mixed.itemBlacklist" );
             this.debugJsonOutput( loot.weaponArmor.itemBlacklist, "loot.weaponArmor.itemBlacklist" );
@@ -150,6 +151,13 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         }
 
         this.fixPresets( weaponIDs );
+
+        if ( this.config.blacklistFromFence )
+        {
+            let traderConfig: ITraderConfig = configServer.getConfig( ConfigTypes.TRADER );
+            const fenceBlacklist = traderConfig.fence.blacklist;
+            fenceBlacklist.push( ...newIDs );
+        }
     }
 
     private addWeaponGroup( groupname: string, newIDs: any )

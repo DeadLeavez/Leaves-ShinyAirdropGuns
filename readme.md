@@ -81,5 +81,11 @@ Added many new features, all which are explain in detail in the config.
 - Weapon groups can have weighting (technically not new, but wasn't mention.) useful if you want to do things like "rarity tiers"
 - Ensure that guns don't get invalid properties that might be present in the config. Edge case.
 
+## 2.1.2
+- Add G36 to default guns config.
+- Add 15% reduced durability burn on ARs making them slightly more durable.
+- Add compatibility with Leaves Questrandomizer. Adding all the shiny guns to be equivalents to all non-shiny for quest purposes. See Questrandomizer documentation if you want to do this for your own weapon mods.
+- Added config option to blacklist the guns from fence. (Enabled by default)
+
 ### TODO
 - Make the quest thing not crash if quests have fucked up data.
