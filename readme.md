@@ -87,5 +87,8 @@ Added many new features, all which are explain in detail in the config.
 - Add compatibility with Leaves Questrandomizer. Adding all the shiny guns to be equivalents to all non-shiny for quest purposes. See Questrandomizer documentation if you want to do this for your own weapon mods.
 - Added config option to blacklist the guns from fence. (Enabled by default)
 
+## 2.1.3
+- Updated compat to 3.11 (this release still works on 3.10)
+
 ### TODO
 - Make the quest thing not crash if quests have fucked up data.

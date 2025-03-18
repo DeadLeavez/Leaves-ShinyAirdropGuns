@@ -1,6 +1,6 @@
 {
     "name": "shiny_airdrop_guns",
-    "version": "2.1.2",
+    "version": "2.1.3",
     "main": "src/mod.js",
     "license": "MIT",
     "author": "leaves",
@@ -9,6 +9,7 @@
     "scripts": {
         "setup": "npm i",
         "build": "node ./build.mjs",
+        "updatedeps": "npx tsc --module node16 updatedeps.ts && node updatedeps.js",
         "buildinfo": "node ./build.mjs --verbose"
     },
     "devDependencies": {

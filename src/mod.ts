@@ -16,8 +16,7 @@ import type { NewItemFromCloneDetails } from "@spt/models/spt/mod/NewItemDetails
 import type { HashUtil } from "@spt/utils/HashUtil";
 import type { JsonUtil } from "@spt/utils/JsonUtil";
 import type { IPreset } from "@spt/models/eft/common/IGlobals";
-
-import type { VFS } from "@spt/utils/VFS";
+import { VFS } from "./deps/VFS";
 import { jsonc } from "jsonc";
 import * as path from "node:path";
 import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
@@ -25,7 +24,6 @@ import type { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import type { ITemplateItem } from "@spt/models/eft/common/tables/ITemplateItem";
 import type { IItemConfig } from "@spt/models/spt/config/IItemConfig";
 import type { ITraderConfig } from "@spt/models/spt/config/ITraderConfig";
-//import { Questrandomizer } from "@leaves/mod";
 
 class LeavesShinyAirdropGuns implements IPostDBLoadMod
 {
@@ -52,7 +50,7 @@ class LeavesShinyAirdropGuns implements IPostDBLoadMod
         this.db = container.resolve<DatabaseServer>( "DatabaseServer" );
         this.jsonUtil = container.resolve<JsonUtil>( "JsonUtil" );
         this.hashUtil = container.resolve<HashUtil>( "HashUtil" );
-        this.vfs = container.resolve<VFS>( "VFS" );
+        this.vfs = new VFS();
         this.customItemService = container.resolve<CustomItemService>( "CustomItemService" );
         const configServer = container.resolve<ConfigServer>( "ConfigServer" );
 
